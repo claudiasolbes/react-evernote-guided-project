@@ -14,8 +14,12 @@ class Content extends Component {
   renderContent = () => {
     if (false) {
       return <NoteEditor />;
-    } else if (false) {
-      return <NoteViewer />;
+    } else if (this.props.noteDisplayed.length >= 1) {
+      return(
+        this.props.noteDisplayed.map(noteClicked => {
+          return <NoteViewer noteClicked = {noteClicked} key={noteClicked.id}/>
+        })
+      )
     } else {
       return <Instructions />;
     }
