@@ -8,7 +8,8 @@ class NoteContainer extends Component {
     super()
     this.state = {
       notes: [],
-      noteDisplayed: []
+      noteDisplayed: null,
+      isFormDisplayed: false
     }
   }
 
@@ -22,7 +23,22 @@ class NoteContainer extends Component {
 
   viewNote = (noteObj) => {
     this.setState({
-      noteDisplayed: [...this.state.noteDisplayed, noteObj]
+      noteDisplayed: noteObj,
+      isFormDisplayed: false
+    })
+  }
+
+  updateNote = () => {
+    this.setState({
+      isFormDisplayed: true
+    })
+  }
+
+  editNote = (event) => {
+    const newText = {...this.state.noteDisplayed}
+    newText[event.target.name] = event.target.value
+    this.setState({
+      noteDisplayed: newText
     })
   }
 
@@ -35,7 +51,13 @@ class NoteContainer extends Component {
               notes={this.state.notes}
               viewNote={this.viewNote}
             />
-          <Content noteDisplayed={this.state.noteDisplayed} />
+          <Content
+            noteDisplayed={this.state.noteDisplayed}
+            updateNote={this.updateNote}
+            isFormDisplayed={this.state.isFormDisplayed}
+            editNote={this.editNote}
+            viewNote={this.viewNote}
+            />
         </div>
       </Fragment>
     );

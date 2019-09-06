@@ -12,14 +12,17 @@ import Instructions from './Instructions';
 */
 class Content extends Component {
   renderContent = () => {
-    if (false) {
-      return <NoteEditor />;
-    } else if (this.props.noteDisplayed.length >= 1) {
-      return(
-        this.props.noteDisplayed.map(noteClicked => {
-          return <NoteViewer noteClicked = {noteClicked} key={noteClicked.id}/>
-        })
-      )
+    if (this.props.isFormDisplayed === true && this.props.noteDisplayed !== null){
+      return <NoteEditor
+        noteDisplayed={this.props.noteDisplayed}
+        editNote={this.props.editNote}
+        viewNote={this.props.viewNote}
+      />;
+    } else if (this.props.noteDisplayed !== null && this.props.isFormDisplayed === false) {
+      return<NoteViewer
+        noteDisplayed = {this.props.noteDisplayed}
+        updateNote = {this.props.updateNote}
+        />
     } else {
       return <Instructions />;
     }
