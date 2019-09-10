@@ -8,9 +8,10 @@ class NoteContainer extends Component {
     super()
     this.state = {
       notes: [],
+      unsortedNotes: [],
       noteDisplayed: null,
       isFormDisplayed: false,
-      searchBar: "",
+      searchBar: ""
     }
   }
 
@@ -18,7 +19,10 @@ class NoteContainer extends Component {
     fetch("http://localhost:3000/api/v1/notes")
     .then(resp => resp.json())
     .then(notes => {
-      this.setState({notes: notes})
+      this.setState({
+        notes: notes,
+        unsortedNotes: [...notes]
+      })
     })
   }
 
@@ -68,6 +72,7 @@ class NoteContainer extends Component {
   // }
 
   deleteNote = () => {
+    alert("Are you sure you want to delete me?")
     const body = {
       user_id: this.state.noteDisplayed.user.id,
       title: this.state.noteDisplayed.title,
@@ -123,6 +128,30 @@ class NoteContainer extends Component {
     })
   }
 
+  sortNotes = () => {
+    const notesArray = [...this.state.notes]
+    notesArray.sort(function(a,b) {
+      const noteA = a.title.toUpperCase()
+      const noteB = b.title.toUpperCase()
+    if (noteA < noteB){
+      return -1;
+    }
+    if (noteA > noteB){
+      return 1;
+    }
+    return 0;
+  })
+  this.setState({
+    notes: notesArray
+  })
+}
+
+unsortNotes = () => {
+  this.setState({
+    notes: this.state.unsortedNotes
+  })
+}
+
   cancelNewNote = () => {
     this.setState({
       isFormDisplayed: false
@@ -145,6 +174,8 @@ class NoteContainer extends Component {
               viewNote={this.viewNote}
               newNoteForm={this.newNoteForm}
               searchBar={this.state.searchBar}
+              sortNotes={this.sortNotes}
+              unsortNotes={this.unsortNotes}
             />
           <Content
             noteDisplayed={this.state.noteDisplayed}

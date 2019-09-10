@@ -18,8 +18,8 @@ class NoteCreator extends Component {
   render() {
     return (
       <form className="note-editor">
-        <input type="text" name="title" onChange={this.handleChange} value={this.state.title}/>
-        <textarea name="body" onChange={this.handleChange} value={this.state.body}/>
+        <input type="text" name="title" placeholder="Give me a title" onChange={this.handleChange} value={this.state.title}/>
+        <textarea name="body" placeholder="What can I help you remember?" onChange={this.handleChange} value={this.state.body}/>
         <div className="button-row">
           <button className="button" type="button" onClick={() => this.props.postNote({...this.state})}>Save</button>
           <button type="button" onClick={this.props.cancelNewNote}>Cancel</button>
