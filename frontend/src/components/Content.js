@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NoteEditor from './NoteEditor';
+import NoteCreator from './NoteCreator';
 import NoteViewer from './NoteViewer';
 import Instructions from './Instructions';
 
@@ -17,11 +18,22 @@ class Content extends Component {
         noteDisplayed={this.props.noteDisplayed}
         editNote={this.props.editNote}
         viewNote={this.props.viewNote}
+        notes={this.props.notes}
+        patchNote={this.props.patchNote}
       />;
-    } else if (this.props.noteDisplayed !== null && this.props.isFormDisplayed === false) {
+    } else if (this.props.isFormDisplayed === true && this.props.noteDisplayed === null){
+      return <NoteCreator
+        postNote={this.props.postNote}
+        newNoteForm={this.props.newNoteForm}
+        cancelNewNote={this.props.cancelNewNote}
+      />
+    }else if (this.props.noteDisplayed !== null && this.props.isFormDisplayed === false) {
       return<NoteViewer
-        noteDisplayed = {this.props.noteDisplayed}
-        updateNote = {this.props.updateNote}
+        noteDisplayed={this.props.noteDisplayed}
+        updateNote={this.props.updateNote}
+        deleteNote={this.props.deleteNote}
+        cancelNewNote={this.props.cancelNewNote}
+        homeScreen={this.props.homeScreen}
         />
     } else {
       return <Instructions />;

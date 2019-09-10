@@ -8,8 +8,11 @@ class Sidebar extends Component {
         <NoteList
           note={this.props.notes}
           viewNote={this.props.viewNote}
-          />
-        <button>New</button>
+          searchBar={this.props.searchBar}
+          newNoteForm={this.props.newNoteForm}
+          newNote={this.props.newNote}
+        />
+        <button onClick={this.props.newNoteForm}>New</button>
       </div>
     );
   }

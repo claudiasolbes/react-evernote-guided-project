@@ -5,12 +5,15 @@ const NoteList = (props) => {
   return (
     <ul>
       {
-        props.note.map(note => {
-          return <NoteItem
-            note={note}
-            key={note.title}
-            viewNote={props.viewNote}
-          />})
+          props.note.filter(note => note.title.toLowerCase().includes(props.searchBar)).map(note => {
+          return( 
+            <NoteItem
+              note={note}
+              key={note.id}
+              viewNote={props.viewNote}
+            />
+          )
+        })
       }
     </ul>
   );
