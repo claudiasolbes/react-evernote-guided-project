@@ -7,7 +7,7 @@ const NoteList = (props) => {
       {
           props.note.filter(note => note.title.toLowerCase().includes(props.searchBar)).map(note => {
           return( 
-            <NoteItem
+            <NoteItem 
               note={note}
               key={note.id}
               viewNote={props.viewNote}

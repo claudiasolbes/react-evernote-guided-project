@@ -33,6 +33,20 @@ class NoteContainer extends Component {
     })
   }
 
+  updateEditedNote = () => {
+    const updatedNotes = this.state.notes.map((note) => {
+      console.log(this.state.noteDisplayed.id)
+      if(note.id === this.state.noteDisplayed.id){
+        return note = this.state.noteDisplayed
+      }
+        return note
+      })
+      console.log(updatedNotes)
+    this.setState({
+      notes: updatedNotes
+    })
+  }
+
   updateNote = () => {
     this.setState({
       isFormDisplayed: true
@@ -64,12 +78,15 @@ class NoteContainer extends Component {
     this.setState({
       isFormDisplayed: false,
     })
+    this.updateEditedNote()
   }
 
-  // findUpdatedNote = () => {
-  //   this.state.notes.map(note => note.id === this.state.noteDisplayed.id)
-    
-  // }
+  findDeletedNote = () => {
+    const updatedNotes = this.state.notes.filter(note => note.id !== this.state.noteDisplayed.id)
+    this.setState({
+      notes: updatedNotes
+    })
+  }
 
   deleteNote = () => {
     alert("Are you sure you want to delete me?")
@@ -86,11 +103,11 @@ class NoteContainer extends Component {
       body: JSON.stringify(body)
     })
     .then(resp => resp.json())
-    
     this.setState({
       noteDisplayed: null,
-      isFormDisplayed: false
+      isFormDisplayed: false,
     })
+    this.findDeletedNote()
   }
 
   homeScreen = () => {

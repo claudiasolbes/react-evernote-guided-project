@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Header = () => {
+const Header = (props) => {
   return (
     <div className="nav-bar">
       <ul>
-        <li className="nav-item"><h2>NoteKeeper</h2></li>
+        <li className="nav-item" onClick={props.hello}><h2>NoteKeeper</h2></li>
       </ul>
     </div>
   );

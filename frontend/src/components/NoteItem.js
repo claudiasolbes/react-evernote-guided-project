@@ -11,8 +11,7 @@ class NoteList extends Component {
 
   render(){
     return(
-    <li
-      onClick ={ () => {this.props.viewNote(this.props.note)}}>
+    <li onClick ={ () => {this.props.viewNote(this.props.note)}}>
       <h2>{this.props.note.title}</h2>
       <p>{this.noteSnippet()}</p>
     </li>
