@@ -35,15 +35,14 @@ class NoteContainer extends Component {
 
   updateEditedNote = () => {
     const updatedNotes = this.state.notes.map((note) => {
-      console.log(this.state.noteDisplayed.id)
       if(note.id === this.state.noteDisplayed.id){
         return note = this.state.noteDisplayed
       }
         return note
       })
-      console.log(updatedNotes)
     this.setState({
-      notes: updatedNotes
+      notes: updatedNotes,
+      unsortedNotes: updatedNotes
     })
   }
 
@@ -61,7 +60,8 @@ class NoteContainer extends Component {
     })
   }
 
-  patchNote = (event) => {
+  patchNote = () => {
+    console.log(this.state.noteDisplayed.user.id)
     const body = {
       user_id: this.state.noteDisplayed.user.id,
       title: this.state.noteDisplayed.title,
@@ -84,7 +84,8 @@ class NoteContainer extends Component {
   findDeletedNote = () => {
     const updatedNotes = this.state.notes.filter(note => note.id !== this.state.noteDisplayed.id)
     this.setState({
-      notes: updatedNotes
+      notes: updatedNotes,
+      unsortedNotes: updatedNotes
     })
   }
 
@@ -138,10 +139,13 @@ class NoteContainer extends Component {
       body: JSON.stringify(body)
     })
     .then(resp => resp.json())
-    this.setState({
-      isFormDisplayed: false,
-      noteDisplayed: newNoteObj,
-      notes: [...this.state.notes, newNoteObj]
+    .then(newNote => {
+      this.setState({
+        isFormDisplayed: false,
+        noteDisplayed: newNote,
+        notes: [...this.state.notes, newNote],
+        unsortedNotes: [...this.state.notes, newNote]
+      })
     })
   }
 

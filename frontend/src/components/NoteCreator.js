@@ -5,7 +5,8 @@ class NoteCreator extends Component {
     super()
     this.state = {
       title: "",
-      body: ""
+      body: "",
+      user_id: null
     }
   }
 

@@ -5,7 +5,7 @@ const NoteList = (props) => {
   return (
     <ul>
       {
-          props.note.filter(note => note.title.toLowerCase().includes(props.searchBar)).map(note => {
+          props.note.filter(note => note.title.toLowerCase().includes(props.searchBar) || note.body.toLowerCase().includes(props.searchBar)).map(note => {
           return( 
             <NoteItem 
               note={note}
